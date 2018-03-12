@@ -50,16 +50,14 @@ export default class ShareScreen extends Component {
     }
 
     async componentDidMount() {
-        console.log('This is component did mount :------> ');
 
         try {
             const { type, value } = await ShareExtension.data()
-            console.log('This is component did mount :------> ', type + '---Value----' + value);
 
             var iName = value.substr((value.lastIndexOf('/') + 1), value.length);
             var base64 = require('base-64');
 
-            RNFetchBlob.fs.readFile(value, 'base64')
+          RNFetchBlob.fs.readFile(value, 'base64')
                 .then((data) => {
                     var decodedData = base64.decode(data);
                     var bytes = decodedData.length;
@@ -87,9 +85,6 @@ export default class ShareScreen extends Component {
                 imageName: iName,
             });
 
-            console.log('This is component did mount :------> ', this.state.value);
-            console.log('This is component did mount :------> ', this.state.imageSize);
-
         } catch (e) {
             console.log('errrr', e)
         }
@@ -106,21 +101,6 @@ export default class ShareScreen extends Component {
     }
 
     render() {
-        // return (
-        //     <Modal backdrop={false}
-        //         onRequestClose={this.onClose}
-        //         style={{ backgroundColor: 'transparent' }} position="center" isOpen={this.state.isOpen} onClosed={this.onClose}>
-        //         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-        //             <View style={{ borderColor: 'green', borderWidth: 1, backgroundColor: 'white', height: 200, width: 300 }}>
-        //                 <TouchableOpacity onPress={this.closing}>
-        //                     <Text style={{ color: 'black' }}>Close</Text>
-        //                     <Text style={{ color: 'black' }}>type: {this.state.type}</Text>
-        //                     <Text style={{ color: 'black' }}>value: {this.state.value}</Text>
-        //                 </TouchableOpacity>
-        //             </View>
-        //         </View>
-        //     </Modal>
-        // );
 
         return (
             <View style={styles.mainContainer}>
@@ -130,7 +110,6 @@ export default class ShareScreen extends Component {
                     </View>
                 </ToolbarAndroid>
                 <View style={styles.container}>
-
 
                     <Image style={{
                         aspectRatio: 1,
@@ -144,11 +123,6 @@ export default class ShareScreen extends Component {
                     <Text>File: {this.state.imageName}</Text>
                     <Text>Size: {this.state.imageSize}</Text>
                 </View>
-
-                {/* <View style={[styles.container, { flexDirection: 'column' }]}> */}
-                {/* <View style={styles.container}><Text>File: </Text> </View>
-                <View style={styles.container}> <Text>Size:</Text></View> */}
-                {/* </View> */}
             </View>
         );
     }
